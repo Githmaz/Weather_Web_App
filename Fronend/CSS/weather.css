@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container{
+    width: 100%;
+    background-color: rgb(9, 27, 100);
+    height: 60px;
+    padding: 0 2% 0 4%;
+    box-sizing: border-box;
+    overflow: hidden ;
+    z-index: 2;
+}
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+.SkyCast-logo{
+    margin-top: 5px;
+    width: 160px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+nav ul li a:hover{
+    color: purple;
+}
+.btn-menu{
+    display: none;
+}
+.search-bar-container {
+    display: flex;
+    align-items: center; /* Vertically center the content within the container */
+  }
+  
+  .input-group {
+    flex-grow: 1;
+    margin-top: 50px;
+    margin-right: 15%; /* Add spacing between the input group and the map */
+  }
+  
+  .search-input{
+    width: 90%;
+    height: 35px;
+    font-size: 25px;
+    border-radius: 9px;
+  }
+
+
+
+.container-input {
+    flex-grow: 1;
+    margin-right: 20%;
+    position: relative;
+}
+.search-logo{
+    margin-top: 20PX;
+}
+.input {
+  width: 80%;
+  margin-top: 40px;
+  padding: 10px 0px 10px 40px;
+  border-radius: 8px;
+  border: solid 1px #333;
+  transition: all .2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+}
+
+.container-input svg {
+  position: absolute;
+  top: 40PX;
+  left: 10px;
+  transform: translate(0, -50%);
+}
+
+.input:focus {
+  opacity: 1;
+  width: 100%;
+}
+.map-preview {
+    width: 150px;
+    height: 150px;
+    margin: 50px 20px 0 20%;
+    border-radius: 100px;
+  }
+
+.weather-card-container{
+    width: 80%;
+    height: 300px;
+    margin-top: 50px;
+    margin-left: 10%;
+    border-radius: 30px;
+    background: #212121;
+    box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                -15px -15px 30px rgb(60, 60, 60);
+   }
+
+body {
+    z-index: -1;
+    background: #0a0a0a;
+}
+
+
+@media only screen and (max-width:700px) {
+    .Destop-section{
+        display: none;
+    }
+    .nav-container{
+        background: transparent;
+        height: 50px;
+        z-index: 1;
+    }
+
+    .SkyCast-logo{
+        width: 130px; 
+        
+    }
+    /* menu button */
+    .btn-menu{
+        display: inline-block;
+    }
+      
+  .bar1, .bar2, .bar3 {
+    width: 20px;
+    height: 2px;
+    background-color: #0b24de;
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+  
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  
+  .change .bar2 {opacity: 0;}
+  
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
+  /* links */
+    nav ul{
+        width: 100%;
+        background: linear-gradient(rgba(87, 90, 255), rgba(162, 84, 255)); 
+        position: absolute;
+        top: 50px;
+        right: 0;
+        z-index: 1;
+    }
+    nav ul li{
+        display: block;
+        margin-top:8px;
+        margin-bottom: 8px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    #menuListw{
+        overflow: hidden;
+        transition: 1s;
+    }
+}
