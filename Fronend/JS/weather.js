@@ -12,3 +12,13 @@ menuBtn.addEventListener("click",()=>{
     menuBtn.classList.toggle("change");
 });
 
+document.getElementById("darkMode-button").addEventListener("change",() => {
+    const checkbox = document.getElementById('darkMode-button');
+    document.body.classList.toggle("dark-theme");
+    if(checkbox.checked){
+        console.log("dark mode")
+    }else{
+        console.log("Light mode")
+
+    }
+})
