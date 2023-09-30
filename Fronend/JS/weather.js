@@ -1,18 +1,9 @@
-var menuList = document.getElementById("menuListw");
-let menuBtn = document.getElementById("btn-menu");
 let weatherApiKey = "ab6c8347959b40618ed32803232709"
 let searchInput = document.getElementById("search-input")
-menuList.style.right = "-100%"
 
 
-menuBtn.addEventListener("click",()=>{
-    if(menuList.style.right== "-100%"){
-        menuList.style.right = "0px"
-    }else{
-        menuList.style.right = "-100%"
-    }
-    menuBtn.classList.toggle("change");
-});
+
+
 //_____________________ Dark Mode ____________________//
 
 document.getElementById("darkMode-button").addEventListener("change",() => {
@@ -56,10 +47,10 @@ document.getElementById("btn-search").addEventListener("click", () => {
 
 
 
-const menu = document.getElementById("menu");
-menu.addEventListener("click", () => {
-    menu.classList.toggle("active");
-});
+// const menu = document.getElementById("menu");
+// menu.addEventListener("click", () => {
+//     menu.classList.toggle("active");
+// });
 
 
 
@@ -88,3 +79,10 @@ new Chart("myChart", {
     }
   }
 });
+
+
+//===================== Mobile View =======================//
+
+document.getElementById("darkMode-button").addEventListener("change",() => {
+  document.body.classList.toggle("mb-dark-theme");
+})
