@@ -511,16 +511,22 @@ font-family: 'Vollkorn SC', serif;
     object-fit: cover; 
   }
   .f-h-card h2 {
+    -webkit-text-stroke: 3px rgba(6, 5, 5, 0.8);
+    font-family: 'Oswald', sans-serif;
     z-index: 2;
     color: rgb(255, 255, 255);
     font-size: 4vw;
   }
   .f-h-card h6 {
+    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.2);
+    font-family: 'Oswald', sans-serif;
     z-index: 2;
     color: rgb(0, 0, 0);
     font-size: 0.9vw;
   }
   .f-h-card p {
+    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.2);
+    font-family: 'Oswald', sans-serif;
     z-index: 2;
     color: rgb(0, 0, 0);
     font-size: 2vw;
@@ -672,8 +678,8 @@ body {
     --search-button-color:rgba(167, 100, 0, 0.3); 
   }
   body {
-    overflow: hidden; 
-    position: fixed; 
+    overflow: auto; 
+    position: static; 
   }
   .mobile-section{
     height: 100vh;

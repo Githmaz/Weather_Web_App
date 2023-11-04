@@ -1,6 +1,35 @@
-let weatherApiKey = "ab6c8347959b40618ed32803232709"
+let weatherApiKey = "549abeb81dba48bb91f54349231310"
 
 
+window.onload = function () {
+    // default data
+    if (window.innerWidth < 769) {
+      setAllDataByLocationMobile("colombo");
+    } else {
+      setAllDataByLocation("colombo");
+    }
+  
+
+  let  getLocation = function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  };
+
+  let  showPosition = function (position) {
+      let latitude = position.coords.latitude;
+      let longitude = position.coords.longitude;
+     
+      setAllDataByCoordinate(latitude,longitude);
+      
+  };
+
+  // Call the getLocation function to initiate the geolocation process
+  getLocation();
+
+};
 
 //_____________________ Dark Mode ____________________//
 
@@ -17,35 +46,58 @@ document.getElementById("btn-search").addEventListener("click", () => {
 
 //_____________________ Set AlL Data by Location   ____________________//
 
-let setAllDataByLocation = (location) => {
-  fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}&days=6`)
-  .then(response => response.json())
-  .then(data => {
+let setAllDataByLocation = async (location) => {
+  try {
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}&days=3`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    setAllData(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+//_____________________ Set AlL Data by Coordinate   ____________________//
+
+let setAllDataByCoordinate= async (latitude,longitude) => {
+  try {
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${latitude},${longitude}&days=3`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    setAllData(data);
+    if (window.innerWidth < 769) {
+      setAllDataMobile(data);
+    } else {
+      setAllData(data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//_____________________ inject All data to WebPage   ____________________//
+  let setAllData = (data) => {
     document.getElementById("weather-card-background-image").src = getBackgroundPic(data.current.condition.text.toLowerCase());
-
     document.getElementById("location").innerHTML = data.location.name; 
     document.getElementById("weatherStatus").innerHTML = data.current.condition.text; 
-    document.getElementById("tempValue").innerHTML =`${Math.floor(data.current.temp_c)}<span style="font-size: 2rem;">°C</span>`;
-
+    document.getElementById("tempValue").innerHTML = `${Math.floor(data.current.temp_c)}<span style="font-size: 2rem;">°C</span>`;
     document.getElementById("wind-speed").innerHTML = `${Math.floor(data.current.wind_kph)} kmh`;
     document.getElementById("wind-direction").innerHTML = `${Math.floor(data.current.wind_kph)}° `;
     document.getElementById("humidity").innerHTML = `${Math.floor(data.current.humidity)} %`
-    document.getElementById("visibility").innerHTML =`${Math.floor(data.current.vis_km)} km`
+    document.getElementById("visibility").innerHTML = `${Math.floor(data.current.vis_km)} km`
     document.getElementById("pressure").innerHTML = `${Math.floor(data.current.pressure_mb)} hpa`
-    document.getElementById("uv").innerHTML=`${data.current.uv}`;
-    document.getElementById("sunrise").innerHTML =`${to24HourFormat(data.forecast.forecastday[0].astro.sunrise)}`;
+    document.getElementById("uv").innerHTML = `${data.current.uv}`;
+    document.getElementById("sunrise").innerHTML = `${to24HourFormat(data.forecast.forecastday[0].astro.sunrise)}`;
     document.getElementById("sunset").innerHTML = `${to24HourFormat(data.forecast.forecastday[0].astro.sunset)}`;
 
-    document.getElementById("fh-card-container").innerHTML =fhCardGenerator(data.forecast.forecastday,4);
+    document.getElementById("fh-card-container").innerHTML = fhCardGenerator(data.forecast.forecastday, 3);
+    injectToChart(data.forecast.forecastday[0].hour, 8);
 
-    injectToChart(data.forecast.forecastday[0].hour,8)
-
-  })
-  .catch(error= () =>{
-     
-  })
-}
+  }
 //_____________________ get date  ____________________// 
 let getdate = (date,days) =>{ // limit cant be  over 28days
   let tempDate = date.split('-');
@@ -86,7 +138,7 @@ let to24HourFormat = (time) =>{
 
 
 
-//_____________________ F  H Card Generator  ____________________//
+//_____________________ F H Card Generator  ____________________//
 let fhCardGenerator = (days,howmany) =>{
   let fhcards = '';
   while(howmany-->0){
@@ -215,30 +267,36 @@ document.getElementById("mb-darkMode-button").addEventListener("change",() => {
 //_________________ Seach button _____________________//
 document.getElementById("mb-searchBtn").addEventListener("click",() => {
   setAllDataByLocationMobile(document.getElementById("mb-searchInput").value);
+
 })
+//_____________________ Set AlL Data by Location   ____________________//
 
-let setAllDataByLocationMobile = (location) => {
-  fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    document.getElementById("mb-location").innerHTML = data.location.name; 
-    document.getElementById("mb-weatherStatus").innerHTML = data.current.condition.text; 
-    document.getElementById("mb-tempValue").innerHTML =`${Math.floor(data.current.temp_c)}<span style="font-size: 2rem;">°C</span>`;
+let setAllDataByLocationMobile = async (location) => {
+  try {
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    setAllDataMobile(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-    document.getElementById("mb-weather-status-img").src = getBackgroundPicMobile(data.current.condition.text.toLowerCase());
-    
-    document.getElementById("mb-wind-speed").innerHTML = `${Math.floor(data.current.wind_kph)} kmh`;
-    document.getElementById("mb-humidity").innerHTML = `${Math.floor(data.current.humidity)} %`
-    document.getElementById("mb-uv").innerHTML=`${data.current.uv}`;
-    document.getElementById("mb-sunrise").innerHTML =`${to24HourFormat(data.forecast.forecastday[0].astro.sunrise)}`;
-    document.getElementById("mb-sunset").innerHTML = `${to24HourFormat(data.forecast.forecastday[0].astro.sunset)}`;
+//_____________________ inject All data to WebPage   ____________________//
 
-
-  })
-  .catch(error =>{
-     
-  })
+let setAllDataMobile = (data) => {
+  document.getElementById("mb-location").innerHTML = data.location.name; 
+  document.getElementById("mb-weatherStatus").innerHTML = data.current.condition.text; 
+  document.getElementById("mb-tempValue").innerHTML = `${Math.floor(data.current.temp_c)}<span style="font-size: 2rem;">°C</span>`;
+  
+  document.getElementById("mb-weather-status-img").src = getBackgroundPicMobile(data.current.condition.text.toLowerCase());
+  document.getElementById("mb-wind-speed").innerHTML = `${Math.floor(data.current.wind_kph)} kmh`;
+  document.getElementById("mb-humidity").innerHTML = `${Math.floor(data.current.humidity)} %`
+  document.getElementById("mb-uv").innerHTML = `${data.current.uv}`;
+  document.getElementById("mb-sunrise").innerHTML = `${to24HourFormat(data.forecast.forecastday[0].astro.sunrise)}`;
+  document.getElementById("mb-sunset").innerHTML = `${to24HourFormat(data.forecast.forecastday[0].astro.sunset)}`;
 }
 
 //_____________________ Set Background pic  ____________________//
@@ -255,12 +313,7 @@ let getBackgroundPicMobile= (status) =>{
     return"assets/logo/sun.png";
   }
 }
-// default data
-  if (window.innerWidth < 769) {
-    setAllDataByLocationMobile("colombo");
-  } else {
-    setAllDataByLocation("colombo");
-  }
+
 
 
 
