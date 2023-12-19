@@ -4,9 +4,9 @@ let weatherApiKey = "549abeb81dba48bb91f54349231310"
 window.onload = function () {
     // default data
     if (window.innerWidth < 769) {
-      setAllDataByLocationMobile("colombo");
+      // setAllDataByLocationMobile("colombo");
     } else {
-      setAllDataByLocation("colombo");
+      // setAllDataByLocation("colombo");
     }
   
 
@@ -22,7 +22,7 @@ window.onload = function () {
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
      
-      setAllDataByCoordinate(latitude,longitude);
+      // setAllDataByCoordinate(latitude,longitude);
       
   };
 
@@ -173,7 +173,7 @@ let shortFromDate = (date)=>{
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
-  return (parseInt(dateArray[2])+" - "+months[dateArray[1]]);
+  return (parseInt(dateArray[2])+" - "+months[dateArray[1]-1]);
    
 }
 
