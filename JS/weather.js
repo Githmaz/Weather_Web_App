@@ -173,7 +173,7 @@ let shortFromDate = (date)=>{
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
-  return (parseInt(dateArray[2])+" - "+months[dateArray[1]]);
+  return (parseInt(dateArray[2])+" - "+months[dateArray[1]-1]);
    
 }
 
