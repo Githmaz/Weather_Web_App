@@ -38,10 +38,21 @@ document.getElementById("darkMode-button").addEventListener("change",() => {
 })
 
 
-//_____________________ Search button  ____________________//
+//_____________________ Searching Location   ____________________//
+
+const inputFeild = document.getElementById("search-input");
+
+inputFeild.addEventListener("keydown",(event)=>{
+  console.log(inputFeild.value)
+  if (event.key === "Enter") {
+    setAllDataByLocation(inputFeild.value);
+    inputFeild.value = "";
+  }
+})
 
 document.getElementById("btn-search").addEventListener("click", () => {
-  setAllDataByLocation(document.getElementById("search-input").value);
+  setAllDataByLocation(inputFeild.value);
+  inputFeild.value = "";
 });
 
 //_____________________ Set AlL Data by Location   ____________________//
@@ -176,7 +187,7 @@ let shortFromDate = (date)=>{
   return (parseInt(dateArray[2])+" - "+months[dateArray[1]-1]);
    
 }
-
+ 
 //_____________________ Set Background pic  ____________________//
 
 let getBackgroundPic = (status) =>{
