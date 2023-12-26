@@ -278,52 +278,61 @@ nav ul li a:hover{
     /* Seach bar  */
 .search-bar-container {
     display: flex;
-    align-items: center; /* Vertically center the content within the container */
+    align-items: center; 
   }
   
 .container-input {
     flex-grow: 1;
     margin-right: 20%;
 }
-.search-logo{
-    margin-top: 80PX;
-}
-.search-input {
-  width: 70%;
-  margin-top: 100px;
-  margin-right: 0;
-  padding: 10px 0px 10px 40px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border: solid 1px #333;
-  transition: all .2s ease-in-out;
-  outline: none;
-  opacity: 0.6;
-  z-index: 1;
+
+
+.search-container{
+  background: #fff;
+  height: 30px;
+  border-radius: 30px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.8s;
+  /*box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  inset -7px -7px 10px 0px rgba(0,0,0,.1),
+ 7px 7px 20px 0px rgba(0,0,0,.1),
+ 4px 4px 5px 0px rgba(0,0,0,.1);
+ text-shadow:  0px 0px 6px rgba(255,255,255,.3),
+            -4px -4px 6px rgba(116, 125, 136, .2);
+text-shadow: 2px 2px 3px rgba(255,255,255,0.5);*/
+box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+            -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+  inset -4px -4px 6px 0 rgba(255,255,255,.2),
+  inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
 }
 
-.container-input svg {
-  position: relative;
-  left: 35px;
-  top: 5px;
-  z-index: 2;
+.search-container:hover > .search-input{
+  width: 400px;
 }
 
-.search-input:focus {
-  opacity: 1;
-}
-.search-button{
-  flex-grow: 1;
-  z-index: 2;
-    height: 38px;
-    width: 7vw;
-    background-color: #70fe4d;
-    border: solid 1px #333;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    cursor: pointer;
+.search-container .search-input{
+  background: transparent;
+  border: none;
+  outline:none;
+  width: 0px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: 0.8s;
+
 }
 
+.search-container .search-btn .fas{
+  color: #012423;
+}
+
+
+
+
+/* new search bar  */
 
 /* map  */
 .map-preview {

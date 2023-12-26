@@ -50,10 +50,10 @@ inputFeild.addEventListener("keydown",(event)=>{
   }
 })
 
-document.getElementById("btn-search").addEventListener("click", () => {
-  setAllDataByLocation(inputFeild.value);
-  inputFeild.value = "";
-});
+// document.getElementById("btn-search").addEventListener("click", () => {
+//   setAllDataByLocation(inputFeild.value);
+//   inputFeild.value = "";
+// });
 
 //_____________________ Set AlL Data by Location   ____________________//
 
