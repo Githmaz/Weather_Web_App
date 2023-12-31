@@ -43,7 +43,6 @@ document.getElementById("darkMode-button").addEventListener("change",() => {
 const inputFeild = document.getElementById("search-input");
 
 inputFeild.addEventListener("keydown",(event)=>{
-  console.log(inputFeild.value)
   if (event.key === "Enter") {
     setAllDataByLocation(inputFeild.value);
     inputFeild.value = "";
@@ -51,8 +50,10 @@ inputFeild.addEventListener("keydown",(event)=>{
 })
 
 document.getElementById("btn-search").addEventListener("click", () => {
-  setAllDataByLocation(inputFeild.value);
-  inputFeild.value = "";
+  if(inputFeild.value !== ""){
+    setAllDataByLocation(inputFeild.value);
+    inputFeild.value = "";
+  }
 });
 
 //_____________________ Set AlL Data by Location   ____________________//
